@@ -8,10 +8,10 @@ import { blogRoutes } from "./modules/blogs/blog.routes";
 const app = express();
 
 // Middleware
-app.use(compression()); // Compresses response bodies for faster delivery
 app.use(express.json()); // Parse incoming JSON requests
 app.use(cookieParser());
-app.set("trust proxy", 1); //* Trust first proxy for secure cookies in production
+app.set("trust proxy", 1);
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
@@ -19,6 +19,12 @@ app.use(
     credentials: true,
   })
 );
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     credentials: true,
+//   })
+// );
 
 app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/user", userRoutes);
