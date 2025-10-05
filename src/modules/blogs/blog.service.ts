@@ -39,6 +39,14 @@ const getSingleBlogById = async (id: number) => {
     where: {
       id: id,
     },
+    include: {
+      author: {
+        select: {
+          name: true,
+          email: true,
+        },
+      },
+    },
   });
   return result;
 };

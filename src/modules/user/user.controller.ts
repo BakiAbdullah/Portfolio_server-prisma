@@ -18,6 +18,25 @@ const getAllUsersFromDB = async (req: Request, res: Response) => {
   }
 };
 
+const deleteUserFromDB = async (req: Request, res: Response) => {
+  try {
+      const id = Number(req.params.id)
+      const result = await UserService.deleteUserFromDB(id);
+      res.status(201).json({
+        success: true,
+        message: "User Deleted successfully!",
+        data: result,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        success: false,
+        message: "Something went wrong!",
+      });
+    }
+};
+
 export const UserController = {
-  getAllUsersFromDB
+  getAllUsersFromDB,
+  deleteUserFromDB,
 };

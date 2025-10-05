@@ -1,3 +1,4 @@
+import { Role } from "@prisma/client";
 import { prisma } from "../configs/db";
 import bcryptjs from "bcryptjs";
 
@@ -26,6 +27,7 @@ export const seedAdmin = async () => {
       email: process.env.ADMIN_EMAIL as string,
       phone: "01703699999",
       password: hashedPassword,
+      role: Role.ADMIN 
     };
 
     const admin = await prisma.user.create({ data: payload });
