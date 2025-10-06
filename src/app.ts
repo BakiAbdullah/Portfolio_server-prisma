@@ -1,10 +1,9 @@
-import compression from "compression";
-import cors from "cors";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import express from "express";
 import { AuthRoutes } from "./modules/auth/auth.routes";
-import { userRoutes } from "./modules/user/user.routes";
 import { blogRoutes } from "./modules/blogs/blog.routes";
+import { userRoutes } from "./modules/user/user.routes";
 const app = express();
 
 // Middleware
