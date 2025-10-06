@@ -13,18 +13,13 @@ app.use(cookieParser());
 app.set("trust proxy", 1);
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(
-//   cors({
-//     origin: "https://portfolio-app-nextjs-nine.vercel.app",
-//     credentials: true,
-//   })
-// );
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://portfolio-app-nextjs-nine.vercel.app",
     credentials: true,
   })
 );
+
 
 app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/user", userRoutes);
