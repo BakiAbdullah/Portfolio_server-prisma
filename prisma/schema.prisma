@@ -15,15 +15,16 @@ datasource db {
 
 // If we don't have any models in our schema, Prisma Client won't be generated. and New Database will not be created
 model User {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
-  email     String   @unique
+  email     String    @unique
   phone     String
   password  String
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  role      Role      @default(USER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   blogs     Blog[]
+  projects  Project[]
 }
 
 model Blog {
@@ -33,6 +34,22 @@ model Blog {
   thumbnail   String?
   authorId    Int
   author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  thumbnail   String?
+  isFeatured  Boolean  @default(false)
+  category    String
+  tags        String[]
+  liveUrl      String?
+  githubUrl   String?
+  authorId    Int
+  author      User     @relation(fields: [authorId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

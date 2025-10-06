@@ -4,30 +4,32 @@ import express from "express";
 import { AuthRoutes } from "./modules/auth/auth.routes";
 import { blogRoutes } from "./modules/blogs/blog.routes";
 import { userRoutes } from "./modules/user/user.routes";
+import { projectRoutes } from "./modules/projects/projects.routes";
 const app = express();
 
 // Middleware
-app.use(express.json()); // Parse incoming JSON requests
+app.use(express.json()); 
 app.use(cookieParser());
 app.set("trust proxy", 1);
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  cors({
-    origin: "https://portfolio-app-nextjs-nine.vercel.app",
-    credentials: true,
-  })
-);
 // app.use(
 //   cors({
-//     origin: "http://localhost:3000",
+//     origin: "https://portfolio-app-nextjs-nine.vercel.app",
 //     credentials: true,
 //   })
 // );
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/blogs", blogRoutes);
+app.use("/api/v1/projects", projectRoutes);
 
 // Default route for testing
 app.get("/", (_req, res) => {
